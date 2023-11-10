@@ -88,6 +88,8 @@ type UserDropdownProps = {
 };
 
 const UserDropdown = ({ session }: UserDropdownProps) => {
+  if (!session || !session.user) return null;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -98,11 +100,13 @@ const UserDropdown = ({ session }: UserDropdownProps) => {
             aria-label="User dropdown"
             size="lg"
           >
-            {session?.user.email}
+            {session.user.email}
           </Button>
           <Avatar className="block md:hidden cursor-pointer z-10">
-            <AvatarImage src={session?.user.image} />
-            <AvatarFallback>{session?.user.name?.slice(0, 2)}</AvatarFallback>
+            <AvatarImage src={session.user.image || ""} />
+            <AvatarFallback>
+              {(session.user.name || "JK").slice(0, 2)}
+            </AvatarFallback>
           </Avatar>
         </div>
       </DropdownMenuTrigger>
