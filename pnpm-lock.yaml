@@ -50,6 +50,9 @@ dependencies:
   next-themes:
     specifier: ^0.2.1
     version: 0.2.1(next@14.0.3-canary.7)(react-dom@18.2.0)(react@18.2.0)
+  next13-progressbar:
+    specifier: ^1.0.4
+    version: 1.0.4(next@14.0.3-canary.7)(react@18.2.0)
   prisma:
     specifier: ^5.5.2
     version: 5.5.2
@@ -1017,6 +1020,10 @@ packages:
     dependencies:
       undici-types: 5.26.5
     dev: true
+
+  /@types/nprogress@0.2.3:
+    resolution: {integrity: sha512-k7kRA033QNtC+gLc4VPlfnue58CM1iQLgn1IMAU8VPHGOj7oIHPp9UlhedEnD/Gl8evoCjwkZjlBORtZ3JByUA==}
+    dev: false
 
   /@types/prop-types@15.7.10:
     resolution: {integrity: sha512-mxSnDQxPqsZxmeShFH+uwQ4kO4gcJcGahjjMFeLbKE95IAZiiZyiEepGZjtXJ7hN/yfu0bu9xN2ajcU0JcxX6A==}
@@ -2559,6 +2566,19 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /next13-progressbar@1.0.4(next@14.0.3-canary.7)(react@18.2.0):
+    resolution: {integrity: sha512-N189VpWPZ5eMxcQeAF5SIe3f+UQ4YTNoMV+6f7p5luZ0rGcPzT4RnRpxuImzCxuMTEuQPItR8FtQubQDi4mHnQ==}
+    peerDependencies:
+      next: '>= 13.0.0'
+      react: '>= 18.0.0'
+    dependencies:
+      '@types/nprogress': 0.2.3
+      next: 14.0.3-canary.7(react-dom@18.2.0)(react@18.2.0)
+      nprogress: 0.2.0
+      prop-types: 15.8.1
+      react: 18.2.0
+    dev: false
+
   /next@14.0.3-canary.7(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-sKs0g4W9peVtoBo1invR/AbH/tIJaNdCNGBPZ/TUX1jft7FwBSWqnnyPKzDTzcgw/90FIgAXCjA1AJQMlOrzYQ==}
     engines: {node: '>=18.17.0'}
@@ -2610,6 +2630,10 @@ packages:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /nprogress@0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
+    dev: false
 
   /oauth4webapi@2.3.0:
     resolution: {integrity: sha512-JGkb5doGrwzVDuHwgrR4nHJayzN4h59VCed6EW8Tql6iHDfZIabCJvg6wtbn5q6pyB2hZruI3b77Nudvq7NmvA==}
@@ -2896,7 +2920,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: true
 
   /punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
@@ -2918,7 +2941,6 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
-    dev: true
 
   /react-remove-scroll-bar@2.3.4(@types/react@18.2.37)(react@18.2.0):
     resolution: {integrity: sha512-63C4YQBUt0m6ALadE9XV56hV8BgJWDmmTPY758iIJjfQKt2nYwoUrPk0LXRXcB/yIj82T1/Ixfdpdk68LwIB0A==}
