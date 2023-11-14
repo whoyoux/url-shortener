@@ -15,10 +15,7 @@ const initialState = {
 const ChangeNameForm = ({ id, name }: { id: string; name?: string }) => {
     const [state, formAction] = useFormState(changeUrlName, initialState);
     return (
-        <form
-            className="flex flex-col gap-2 text-center border rounded-md p-6"
-            action={formAction}
-        >
+        <form className="flex flex-col gap-4" action={formAction}>
             <H3>ChangeNameForm</H3>
             <Input
                 name="name"
