@@ -3,16 +3,16 @@ import { H2 } from "@/components/ui/H2";
 import AuthGuard from "@/lib/AuthGuard";
 
 const Dashboard = async () => {
-  const session = await AuthGuard();
+    const session = await AuthGuard();
 
-  return (
-    <main className="pt-10">
-      <H1>
-        Hello <i>{session.user.name}</i> on dashboard
-      </H1>
-      <H2>Please select URL to see statictics</H2>
-    </main>
-  );
+    return (
+        <main>
+            <H1>
+                Hello <i>{session.user.name}</i> on dashboard
+            </H1>
+            <H2 className="mt-4">Please select your URL on the left</H2>
+        </main>
+    );
 };
 
 export default Dashboard;

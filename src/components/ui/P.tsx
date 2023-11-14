@@ -1,3 +1,15 @@
-export function P({ children }: { children: React.ReactNode }) {
-  return <p className="leading-7 [&:not(:first-child)]:mt-6">{children}</p>;
+import { cn } from "@/lib/utils";
+
+export function P({
+    children,
+    className,
+}: {
+    children: React.ReactNode;
+    className?: string;
+}) {
+    return (
+        <p className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}>
+            {children}
+        </p>
+    );
 }

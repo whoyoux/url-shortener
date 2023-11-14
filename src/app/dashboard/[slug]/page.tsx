@@ -5,18 +5,10 @@ import AuthGuard from "@/lib/AuthGuard";
 import { H1 } from "@/components/ui/H1";
 import { H2 } from "@/components/ui/H2";
 import { H3 } from "@/components/ui/H3";
-import ChangeNameForm from "./ChangeNameForm";
-import { Button } from "@/components/ui/button";
-import { Pen } from "lucide-react";
-
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
+import ChangeNameDialog from "./ChangeNameDialog";
+import { P } from "@/components/ui/P";
+import { H4 } from "@/components/ui/H4";
+import DeleteURLModal from "./DeleteURLDialog";
 
 const URLDashboard = async ({ params }: { params: { slug: string } }) => {
     const session = await AuthGuard();
@@ -31,38 +23,66 @@ const URLDashboard = async ({ params }: { params: { slug: string } }) => {
 
     return (
         <div className="flex flex-col gap-4 items-start">
-            <div className="flex flex-row items-center gap-4">
-                <H1>{url.name ? url.name : "Shorted URL"}</H1>
-                <ChangeNameDialog id={url.id} name={url.name} />
+            <div className="flex flex-row items-center gap-4 w-full justify-between">
+                <div className="flex flex-row gap-4">
+                    <H1>{url.name ? url.name : "Shorted URL"}</H1>
+                    <ChangeNameDialog id={url.id} name={url.name} />
+                </div>
+                <DeleteURLModal id={url.id} />
             </div>
 
-            <H3>Destination: {url.originalUrl}</H3>
+            <Overview originalUrl={url.originalUrl} shortUrl={url.shortUrl} />
+
+            <Statistics />
+
+            <Charts />
+        </div>
+    );
+};
+
+type OverviewProps = {
+    originalUrl: string;
+    shortUrl: string;
+};
+
+const Overview = ({ originalUrl, shortUrl }: OverviewProps) => {
+    return (
+        <div className="mt-10">
+            <H2 className="mt-10">Overview</H2>
+
+            <H4 className="mt-4">Destination: {originalUrl}</H4>
             <div className="flex items-center gap-4">
-                <H3>Shorted version:</H3>
-                <CopyButton shortUrl={params.slug} />
+                <H4>Shorted version:</H4>
+                <CopyButton shortUrl={shortUrl} />
             </div>
         </div>
     );
 };
 
-type ChangeNameDialogProps = {
-    id: string;
-    name: string;
+const Statistics = () => {
+    return (
+        <div className="flex flex-col gap-4 items-start w-full mt-10">
+            <H2>Statistics</H2>
+            <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
+                <StatisticsItem />
+                <StatisticsItem />
+                <StatisticsItem />
+            </div>
+        </div>
+    );
 };
 
-const ChangeNameDialog = ({ id, name }: ChangeNameDialogProps) => {
+const StatisticsItem = () => {
     return (
-        <Dialog>
-            <DialogTrigger asChild>
-                <Button variant="ghost">
-                    <Pen />
-                </Button>
-            </DialogTrigger>
-            <DialogContent>
-                <ChangeNameForm id={id} name={name} />
-            </DialogContent>
-        </Dialog>
+        <div className="border rounded-md py-6 px-4 flex flex-col items-start">
+            <H3>1234</H3>
+            <P className="[&:not(:first-child)]:mt-0">Total clicks</P>
+        </div>
     );
+};
+
+const Charts = () => {
+    return <P>Some charts or smth</P>;
 };
 
 export default URLDashboard;

@@ -16,13 +16,12 @@ const ChangeNameForm = ({ id, name }: { id: string; name?: string }) => {
     const [state, formAction] = useFormState(changeUrlName, initialState);
     return (
         <form className="flex flex-col gap-4" action={formAction}>
-            <H3>ChangeNameForm</H3>
             <Input
                 name="name"
                 placeholder={name || "new url name..."}
                 type="text"
             />
-            <input type="hidden" name="id" value={id} id="id" />
+            <input type="hidden" name="id" value={id} />
             <SubmitButton />
             {state && state.message && <P>{state.message}</P>}
         </form>
