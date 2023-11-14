@@ -16,8 +16,6 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
     },
   });
 
-  console.log(urls);
-
   //TODO: Add sidebar with links to projects
   return (
     <main className="flex gap-4 pt-10 md:pt-16">

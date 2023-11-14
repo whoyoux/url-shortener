@@ -7,6 +7,7 @@ import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
 import Footer from "@/components/footer";
 import NextAuthSessionProvider from "@/components/session-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,6 +39,7 @@ export default function RootLayout({
             <Header />
             {children}
             {/* <Footer /> */}
+            <Toaster />
           </ThemeProvider>
         </NextAuthSessionProvider>
       </body>
