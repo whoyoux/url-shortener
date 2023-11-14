@@ -1,10 +1,7 @@
 import { Button } from "@/components/ui/button";
 import AuthGuard from "@/lib/AuthGuard";
-import { getAuthSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { Url } from "@prisma/client";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import React from "react";
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
@@ -14,9 +11,13 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
     where: {
       userId: session.user.id,
     },
+    select: {
+      id: true,
+      originalUrl: true,
+      shortUrl: true,
+    },
   });
 
-  //TODO: Add sidebar with links to projects
   return (
     <main className="flex gap-4 pt-10 md:pt-16">
       <div className="px-4 flex flex-col gap-4 border-r min-w-[200px]">
@@ -37,7 +38,7 @@ const SideBarLink = ({
 }) => {
   return (
     <Link href={`/dashboard/${shortUrl}`}>
-      <Button className="w-full">{shortUrl}</Button>
+      <Button className="w-full dark:text-white">URL {shortUrl}</Button>
     </Link>
   );
 };
