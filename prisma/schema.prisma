@@ -49,6 +49,7 @@ model User {
 
 model Url {
   id          String @id @default(cuid())
+  name        String @default("")
   originalUrl String
   shortUrl    String @unique
 

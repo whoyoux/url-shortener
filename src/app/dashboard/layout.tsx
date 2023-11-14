@@ -5,42 +5,50 @@ import Link from "next/link";
 import React from "react";
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
-  const session = await AuthGuard();
+    const session = await AuthGuard();
 
-  const urls = await prisma.url.findMany({
-    where: {
-      userId: session.user.id,
-    },
-    select: {
-      id: true,
-      originalUrl: true,
-      shortUrl: true,
-    },
-  });
+    const urls = await prisma.url.findMany({
+        where: {
+            userId: session.user.id,
+        },
+        select: {
+            id: true,
+            originalUrl: true,
+            shortUrl: true,
+            name: true,
+        },
+        orderBy: {
+            createdAt: "asc",
+        },
+    });
 
-  return (
-    <main className="flex gap-4 pt-10 md:pt-16">
-      <div className="px-4 flex flex-col gap-4 border-r min-w-[200px]">
-        {urls.map((url) => (
-          <SideBarLink key={url.id} {...url} />
-        ))}
-      </div>
-      <div className="flex-1">{children}</div>
-    </main>
-  );
+    return (
+        <main className="flex gap-4 pt-10 md:pt-16">
+            <div className="px-4 flex flex-col gap-4 border-r min-w-[200px]">
+                {urls.map((url) => (
+                    <SideBarLink key={url.id} {...url} />
+                ))}
+            </div>
+            <div className="flex-1">{children}</div>
+        </main>
+    );
 };
 
 const SideBarLink = ({
-  shortUrl,
+    shortUrl,
+    name,
 }: {
-  originalUrl: string;
-  shortUrl: string;
+    originalUrl: string;
+    shortUrl: string;
+    name: string;
 }) => {
-  return (
-    <Link href={`/dashboard/${shortUrl}`}>
-      <Button className="w-full dark:text-white">URL {shortUrl}</Button>
-    </Link>
-  );
+    return (
+        <Link href={`/dashboard/${shortUrl}`}>
+            <Button className="w-full dark:text-white">
+                {name ? `${name}` : `URL ${shortUrl}`}
+            </Button>
+        </Link>
+    );
 };
 
 export default DashboardLayout;
