@@ -44,7 +44,7 @@ const SideBarLink = ({
 }) => {
     return (
         <Link href={`/dashboard/${shortUrl}`}>
-            <Button className="w-full dark:text-white">
+            <Button className="w-full">
                 {name ? `${name}` : `URL ${shortUrl}`}
             </Button>
         </Link>
