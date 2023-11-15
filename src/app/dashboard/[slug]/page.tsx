@@ -48,10 +48,10 @@ type OverviewProps = {
 const Overview = ({ originalUrl, shortUrl }: OverviewProps) => {
     return (
         <div className="mt-10">
-            <H2 className="mt-10">Overview</H2>
+            <H2>Overview</H2>
 
             <H4 className="mt-4">Destination: {originalUrl}</H4>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 mt-2">
                 <H4>Shorted version:</H4>
                 <CopyButton shortUrl={shortUrl} />
             </div>
