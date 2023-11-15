@@ -16,6 +16,14 @@ const RedirectPage = async ({ params }: { params: { slug: string } }) => {
         },
     });
 
+    if (!data) {
+        return (
+            <main className="pt-10 text-center">
+                <H1>No shorted link found!</H1>
+            </main>
+        );
+    }
+
     await prisma.url.update({
         where: {
             id: data?.id,
@@ -26,14 +34,6 @@ const RedirectPage = async ({ params }: { params: { slug: string } }) => {
             },
         },
     });
-
-    if (!data) {
-        return (
-            <main className="pt-10 text-center">
-                <H1>No shorted link found!</H1>
-            </main>
-        );
-    }
 
     redirect(data.originalUrl);
 };
