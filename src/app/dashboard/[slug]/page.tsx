@@ -1,14 +1,14 @@
 import { prisma } from "@/lib/prisma";
-import CopyButton from "./CopyButton";
+import CopyButton from "../../../components/dashboard/CopyButton";
 import { notFound } from "next/navigation";
 import AuthGuard from "@/lib/AuthGuard";
 import { H1 } from "@/components/ui/H1";
 import { H2 } from "@/components/ui/H2";
 import { H3 } from "@/components/ui/H3";
-import ChangeNameDialog from "./ChangeNameDialog";
+import ChangeNameDialog from "../../../components/dashboard/ChangeNameDialog";
 import { P } from "@/components/ui/P";
 import { H4 } from "@/components/ui/H4";
-import DeleteURLModal from "./DeleteURLDialog";
+import DeleteURLModal from "../../../components/dashboard/DeleteURLDialog";
 
 const URLDashboard = async ({ params }: { params: { slug: string } }) => {
     const session = await AuthGuard();
