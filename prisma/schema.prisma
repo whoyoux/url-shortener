@@ -35,6 +35,11 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+enum UserPlan {
+  FREE
+  PRO
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -45,13 +50,18 @@ model User {
   sessions      Session[]
 
   urls Url[]
+
+  plan UserPlan @default(FREE)
 }
 
 model Url {
-  id          String @id @default(cuid())
-  name        String @default("")
+  id          String  @id @default(cuid())
+  name        String  @default("")
   originalUrl String
-  shortUrl    String @unique
+  shortUrl    String  @unique
+  slug        String? @unique //Only in pro plan
+
+  totalClicks Int @default(0)
 
   user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String?

@@ -9,8 +9,8 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import CreateNewURLForm from "./CreateNewURLForm";
+import SideBarLinks from "./SideBarLinks";
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
     const session = await AuthGuard();
@@ -18,12 +18,6 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
     const urls = await prisma.url.findMany({
         where: {
             userId: session.user.id,
-        },
-        select: {
-            id: true,
-            originalUrl: true,
-            shortUrl: true,
-            name: true,
         },
         orderBy: {
             createdAt: "asc",
@@ -34,9 +28,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
         <main className="flex gap-4 pt-10 md:pt-16">
             <div className="px-4 flex flex-col gap-4 border-r min-w-[200px]">
                 <CreateNewURLModal />
-                {urls.map((url) => (
-                    <SideBarLink key={url.id} {...url} />
-                ))}
+                <SideBarLinks urls={urls} />
             </div>
             <div className="flex-1">{children}</div>
         </main>
@@ -54,23 +46,6 @@ const CreateNewURLModal = () => {
                 <CreateNewURLForm />
             </DialogContent>
         </Dialog>
-    );
-};
-
-const SideBarLink = ({
-    shortUrl,
-    name,
-}: {
-    originalUrl: string;
-    shortUrl: string;
-    name: string;
-}) => {
-    return (
-        <Link href={`/dashboard/${shortUrl}`}>
-            <Button className="w-full" variant="link">
-                {name ? `${name}` : `URL ${shortUrl}`}
-            </Button>
-        </Link>
     );
 };
 
