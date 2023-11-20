@@ -2,7 +2,7 @@
 const nextConfig = {
     experimental: {
         serverComponentsExternalPackages: ["@prisma/client"],
-        // ppr: true,
+        ppr: true,
     },
 };
 
