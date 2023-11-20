@@ -35,6 +35,8 @@ const RedirectPage = async ({ params }: { params: { slug: string } }) => {
         },
     });
 
+    console.log("Redirecting to: ", data.originalUrl, " Time: ", new Date());
+
     redirect(data.originalUrl);
 };
 
