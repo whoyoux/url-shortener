@@ -1,4 +1,5 @@
 import { H1 } from "@/components/ui/H1";
+import { P } from "@/components/ui/P";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import React from "react";
@@ -45,7 +46,13 @@ const RedirectPage = async ({ params }: { params: { slug: string } }) => {
 
         redirect(data.originalUrl);
     } catch (err) {
-        return <H1>Something went wrong!</H1>;
+        console.error(err);
+        return (
+            <>
+                <H1>Something went wrong!</H1>
+                <P>{JSON.stringify(err)}</P>
+            </>
+        );
     }
 };
 
