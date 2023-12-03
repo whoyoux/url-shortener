@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import CreateNewURLForm from "./CreateNewURLForm";
 import SideBarLinks from "./SideBarLinks";
+import LinksComboBox from "./LinksComboBox";
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
     const session = await AuthGuard();
@@ -25,10 +26,14 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
     });
 
     return (
-        <main className="flex gap-4 pt-10 md:pt-16">
-            <div className="px-4 flex flex-col gap-4 border-r min-w-[200px]">
+        <main className="flex flex-col md:flex-row gap-4 pt-10 md:pt-16">
+            <div className="hidden px-4 md:flex flex-col gap-4 border-r min-w-[200px]">
                 <CreateNewURLModal />
                 <SideBarLinks urls={urls} />
+            </div>
+            <div className="flex md:hidden w-full justify-between gap-4">
+                <LinksComboBox urls={urls} />
+                <CreateNewURLModal />
             </div>
             <div className="flex-1">{children}</div>
         </main>
