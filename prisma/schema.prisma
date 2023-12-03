@@ -61,6 +61,8 @@ model Url {
   shortUrl    String  @unique
   slug        String? @unique //Only in pro plan
 
+  history UrlHistory[]
+
   totalClicks Int @default(0)
 
   user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -70,6 +72,20 @@ model Url {
   updatedAt DateTime @updatedAt
 
   @@index([userId, shortUrl])
+}
+
+model UrlHistory {
+  id String @id @default(cuid())
+  ip String
+
+  city      String?
+  country   String?
+  latitude  String?
+  longitude String?
+  regin     String?
+
+  url   Url?    @relation(fields: [urlId], references: [id], onDelete: Cascade)
+  urlId String?
 }
 
 model VerificationToken {

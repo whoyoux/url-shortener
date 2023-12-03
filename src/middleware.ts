@@ -1,12 +1,29 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { UrlResponseData } from "./app/api/url/route";
 
-// This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
-    return NextResponse.redirect(new URL("/home", request.url));
+export async function middleware(request: NextRequest) {
+    console.log(request.nextUrl.pathname.split("/")[2]);
+
+    const res = await fetch("http://localhost:3000/api/url", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            shortUrl: request.nextUrl.pathname.split("/")[2],
+        }),
+    });
+
+    const data = (await res.json()) as UrlResponseData;
+    console.log(data);
+
+    if (data.status === "success")
+        return NextResponse.redirect(new URL(`${data.url}`, request.url));
+
+    return NextResponse.redirect(new URL("/404", request.url));
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
     matcher: "/r/:path*",
 };

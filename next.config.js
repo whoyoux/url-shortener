@@ -4,6 +4,7 @@ const nextConfig = {
         serverComponentsExternalPackages: ["@prisma/client"],
         ppr: true,
     },
+    reactStrictMode: false,
 };
 
 module.exports = nextConfig;
