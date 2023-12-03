@@ -82,7 +82,7 @@ model UrlHistory {
   country   String?
   latitude  String?
   longitude String?
-  regin     String?
+  region    String?
 
   url   Url?    @relation(fields: [urlId], references: [id], onDelete: Cascade)
   urlId String?

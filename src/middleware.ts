@@ -39,7 +39,7 @@ const updateStatsAndGetUrl = async (shortUrl: string, request: NextRequest) => {
                             country: request.geo?.country || "",
                             latitude: request.geo?.latitude || "",
                             longitude: request.geo?.longitude || "",
-                            regin: request.geo?.region || "",
+                            region: request.geo?.region || "",
                         },
                     },
                 },
