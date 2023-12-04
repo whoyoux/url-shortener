@@ -10,9 +10,6 @@ import Overview from "./(components)/overview";
 import Statistics from "./(components)/statistics";
 import History from "./(components)/history";
 
-export const CARD_STYLE =
-    "rounded-md bg-card border text-card-foreground shadow-sm py-6 px-4 w-full";
-
 const URLDashboard = async ({ params }: { params: { slug: string } }) => {
     const session = await AuthGuard();
     const url = await prisma.url.findUnique({

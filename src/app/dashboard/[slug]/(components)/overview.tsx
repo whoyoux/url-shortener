@@ -5,7 +5,7 @@ import { H4 } from "@/components/ui/H4";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Link } from "lucide-react";
-import { CARD_STYLE } from "../page";
+import { CARD_STYLE } from "@/config/config";
 
 type OverviewProps = {
     originalUrl: string;

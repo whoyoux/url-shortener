@@ -2,7 +2,7 @@ import { H2 } from "@/components/ui/H2";
 import { H3 } from "@/components/ui/H3";
 import { P } from "@/components/ui/P";
 import { cn } from "@/lib/utils";
-import { CARD_STYLE } from "../page";
+import { CARD_STYLE } from "@/config/config";
 
 type StatisticsProps = {
     totalClicks: number;
