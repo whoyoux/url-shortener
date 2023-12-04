@@ -1,5 +1,13 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
+
+const UrlWithHistory = Prisma.validator<Prisma.UrlDefaultArgs>()({
+    include: {
+        history: true,
+    },
+});
+
+export type UrlWithHistoryType = Prisma.UrlGetPayload<typeof UrlWithHistory>;
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
 

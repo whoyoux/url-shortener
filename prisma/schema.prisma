@@ -86,6 +86,8 @@ model UrlHistory {
 
   url   Url?    @relation(fields: [urlId], references: [id], onDelete: Cascade)
   urlId String?
+
+  createdAt DateTime @default(now())
 }
 
 model VerificationToken {

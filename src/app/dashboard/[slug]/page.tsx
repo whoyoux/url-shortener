@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { UrlWithHistoryType, prisma } from "@/lib/prisma";
 import CopyButton from "../../../components/dashboard/CopyButton";
 import { notFound } from "next/navigation";
 import AuthGuard from "@/lib/AuthGuard";
@@ -13,6 +13,19 @@ import { Url } from "@prisma/client";
 import { unstable_noStore as noStore } from "next/cache";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableFooter,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+import Image from "next/image";
 
 const URLDashboard = async ({ params }: { params: { slug: string } }) => {
     noStore();
@@ -22,6 +35,13 @@ const URLDashboard = async ({ params }: { params: { slug: string } }) => {
             shortUrl: params.slug,
             userId: session?.user?.id,
         },
+        include: {
+            history: {
+                orderBy: {
+                    createdAt: "desc",
+                },
+            },
+        },
     });
 
     if (!url) return notFound();
@@ -30,7 +50,9 @@ const URLDashboard = async ({ params }: { params: { slug: string } }) => {
         <div className="flex flex-col gap-4 items-start">
             <div className="flex flex-row items-center gap-4 w-full justify-between">
                 <div className="flex flex-row gap-4">
-                    <H1>{url.name ? url.name : "Shorted URL"}</H1>
+                    <H1 className="text-card-foreground">
+                        {url.name ? url.name : "Shorted URL"}
+                    </H1>
                     <ChangeNameDialog id={url.id} name={url.name} />
                 </div>
                 <DeleteURLModal id={url.id} />
@@ -39,6 +61,8 @@ const URLDashboard = async ({ params }: { params: { slug: string } }) => {
             <Overview originalUrl={url.originalUrl} shortUrl={url.shortUrl} />
 
             <Statistics url={url} />
+
+            <History history={url.history} />
 
             <Charts />
         </div>
@@ -50,13 +74,16 @@ type OverviewProps = {
     shortUrl: string;
 };
 
+const CARD_STYLE =
+    "rounded-md bg-card border text-card-foreground shadow-sm py-6 px-4 w-full";
+
 const Overview = ({ originalUrl, shortUrl }: OverviewProps) => {
     return (
         <div className="mt-10 flex flex-col gap-4 w-full">
             <H2>Overview</H2>
 
             <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="rounded-md bg-secondary py-6 px-4 w-full">
+                <div className={cn(CARD_STYLE)}>
                     <H3 className="mb-5">General info</H3>
                     <div className="flex items-center gap-4 mt-2">
                         <H4 className="">Destination: </H4>
@@ -78,10 +105,10 @@ const Overview = ({ originalUrl, shortUrl }: OverviewProps) => {
                     </div>
                 </div>
 
-                <div className="rounded-md bg-secondary py-6 px-4 w-full">
+                <div className={cn(CARD_STYLE)}>
                     <H3 className="mb-5">Only in PRO plan</H3>
                     <div className="flex items-center gap-4 mt-2">
-                        <H4>Slug:</H4>
+                        <H4 className="text-card-foreground">Slug:</H4>
                         <Button size="sm" variant="destructive" disabled>
                             Only in pro plan
                         </Button>
@@ -92,14 +119,17 @@ const Overview = ({ originalUrl, shortUrl }: OverviewProps) => {
     );
 };
 
-const Statistics = ({ url }: { url: Url }) => {
+const Statistics = ({ url }: { url: Partial<Url> }) => {
     return (
         <div className="flex flex-col gap-4 items-start w-full mt-10">
             <H2>Statistics</H2>
             <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
                 <StatisticsItem title="Total clicks" value={url.totalClicks} />
-                <StatisticsItem title="Last clicks" value={2} />
-                <StatisticsItem title="Today clicks" value={3214} />
+                <StatisticsItem title="Last location city" value={"Krakow"} />
+                <StatisticsItem
+                    title="Last location country"
+                    value={"Poland"}
+                />
             </div>
         </div>
     );
@@ -107,14 +137,71 @@ const Statistics = ({ url }: { url: Url }) => {
 
 type StatisticsItemProps = {
     title: string;
-    value: number;
+    value: number | string | React.ReactNode;
 };
 
 const StatisticsItem = ({ title, value }: StatisticsItemProps) => {
     return (
-        <div className="bg-secondary rounded-md py-6 px-4 flex flex-col items-start">
+        <div className={cn(CARD_STYLE, "flex flex-col items-start")}>
             <H3>{value}</H3>
             <P className="[&:not(:first-child)]:mt-0">{title}</P>
+        </div>
+    );
+};
+
+type HistoryProps = {
+    history: UrlWithHistoryType["history"];
+};
+
+const History = ({ history }: HistoryProps) => {
+    return (
+        <div className="flex flex-col gap-4 items-start w-full mt-10">
+            <H2>History</H2>
+
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead>Country</TableHead>
+                        <TableHead>City</TableHead>
+                        <TableHead>IP</TableHead>
+                        <TableHead className="text-right">Date</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {history.length === 0 && (
+                        <TableRow>
+                            <H4>
+                                <TableCell>No history yet :/</TableCell>
+                            </H4>
+                        </TableRow>
+                    )}
+                    {history.map((item) => (
+                        <TableRow key={item.id}>
+                            <TableCell>
+                                {item.country ? (
+                                    <Image
+                                        src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${item.country}.svg`}
+                                        width={40}
+                                        height={30}
+                                        alt="Country flag"
+                                        className="h-auto"
+                                    />
+                                ) : (
+                                    "No country code found"
+                                )}
+                            </TableCell>
+                            <TableCell>{item.city}</TableCell>
+                            <TableCell>{item.ip}</TableCell>
+                            <TableCell className="text-right">
+                                {`${item.createdAt.toLocaleTimeString()} ${
+                                    item.createdAt.toLocaleDateString() ||
+                                    "Unknown date"
+                                }`}
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
         </div>
     );
 };
