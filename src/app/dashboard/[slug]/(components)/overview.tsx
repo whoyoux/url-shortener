@@ -23,13 +23,13 @@ const Overview = ({ originalUrl, shortUrl }: OverviewProps) => {
                     <div className="flex items-center gap-4 mt-2">
                         <H4 className="">Destination: </H4>
                         <div className="truncate">
-                            <Link
+                            <a
                                 href={originalUrl}
                                 target="_blank"
                                 className="hover:underline"
                             >
                                 {originalUrl}
-                            </Link>
+                            </a>
                         </div>
                     </div>
 
