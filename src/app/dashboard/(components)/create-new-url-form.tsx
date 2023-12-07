@@ -5,7 +5,7 @@ import { useFormStatus, useFormState } from "react-dom";
 import { Input } from "@/components/ui/input";
 
 import { Button } from "@/components/ui/button";
-import { createShortUrl } from "../(actions)/createShortUrl";
+import { createShortUrl } from "../../(actions)/createShortUrl";
 import { DialogClose } from "@/components/ui/dialog";
 
 const initialState = {

@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import AuthGuard from "@/lib/AuthGuard";
 import { prisma } from "@/lib/prisma";
-import Link from "next/link";
 
 import {
     Dialog,
@@ -9,9 +8,9 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import CreateNewURLForm from "./CreateNewURLForm";
-import SideBarLinks from "./SideBarLinks";
-import LinksComboBox from "./LinksComboBox";
+import CreateNewURLForm from "./(components)/create-new-url-form";
+import SideBarLinks from "./(components)/sidebar-links";
+import LinksComboBox from "./(components)/links-combo-box";
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
     const session = await AuthGuard();
@@ -26,7 +25,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
     });
 
     return (
-        <main className="flex flex-col md:flex-row gap-4 pt-10 md:pt-16">
+        <main className="flex flex-col md:flex-row gap-4">
             <div className="hidden px-4 md:flex flex-col gap-4 border-r min-w-[200px]">
                 <CreateNewURLModal />
                 <SideBarLinks urls={urls} />

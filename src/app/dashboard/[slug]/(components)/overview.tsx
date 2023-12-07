@@ -1,4 +1,4 @@
-import CopyButton from "@/components/dashboard/CopyButton";
+import CopyButton from "@/components/dashboard/copy-button";
 import { H2 } from "@/components/ui/H2";
 import { H3 } from "@/components/ui/H3";
 import { H4 } from "@/components/ui/H4";

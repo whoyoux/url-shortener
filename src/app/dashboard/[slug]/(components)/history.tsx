@@ -24,7 +24,6 @@ type HistoryProps = {
 };
 
 const History = ({ history }: HistoryProps) => {
-    console.log(history);
     return (
         <div className="flex flex-col gap-4 items-start w-full mt-10">
             <H2>History</H2>

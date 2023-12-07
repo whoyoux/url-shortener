@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Pen } from "lucide-react";
 
-import ChangeNameForm from "./ChangeNameForm";
+import ChangeNameForm from "./change-name-form";
 
 type ChangeNameDialogProps = {
     id: string;

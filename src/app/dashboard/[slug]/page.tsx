@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import AuthGuard from "@/lib/AuthGuard";
 import { H1 } from "@/components/ui/H1";
 
-import ChangeNameDialog from "@/components/dashboard/ChangeNameDialog";
-import DeleteURLModal from "@/components/dashboard/DeleteURLDialog";
+import ChangeNameDialog from "@/components/dashboard/change-name-dialog";
+import DeleteURLModal from "@/components/dashboard/detele-url-dialog";
 
 import Overview from "./(components)/overview";
 import Statistics from "./(components)/statistics";

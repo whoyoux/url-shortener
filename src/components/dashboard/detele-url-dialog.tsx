@@ -11,7 +11,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import DeleteUrlForm from "./DeleteUrlForm";
+import DeleteUrlForm from "./delete-url-form";
 
 type DeleteURLModalProps = {
     id: string;

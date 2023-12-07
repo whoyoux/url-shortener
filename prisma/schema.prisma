@@ -51,7 +51,11 @@ model User {
 
   urls Url[]
 
-  plan UserPlan @default(FREE)
+  plan                     UserPlan  @default(FREE)
+  stripeCustomerId         String?   @unique
+  stripeSubscriptionId     String?
+  stripeCurrentPeriodStart DateTime?
+  stripeCurrentPeriodEnd   DateTime?
 }
 
 model Url {
@@ -76,7 +80,8 @@ model Url {
 
 model UrlHistory {
   id String @id @default(cuid())
-  ip String
+
+  ip String //Only in pro plan
 
   city      String?
   country   String?
