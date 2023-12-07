@@ -3,7 +3,7 @@ import type { Stripe } from "stripe";
 import { stripe } from "@/lib/stripe";
 import { prisma } from "@/lib/prisma";
 
-export enum StripeWebhooks {
+enum StripeWebhooks {
     AsyncPaymentSuccess = "checkout.session.async_payment_succeeded",
     Completed = "checkout.session.completed",
     PaymentFailed = "checkout.session.async_payment_failed",
@@ -76,34 +76,4 @@ export async function POST(req: NextRequest) {
             }
         );
     }
-
-    // try {
-    //     const signature = headers().get(STRIPE_SIGNATURE_HEADER) as string;
-
-    //     if (!signature) {
-    //         throw new Error("Stripe signature is missing");
-    //     }
-
-    //     const body = await req.text();
-
-    //     const event = await stripe.webhooks.constructEventAsync(
-    //         body,
-    //         signature,
-    //         process.env.STRIPE_WEBHOOK_SECRET || ""
-    //     );
-
-    //     switch (event.type) {
-    //         case StripeWebhooks.Completed:
-    //             const session = event.data.object as Stripe.Checkout.Session;
-    //             const subscriptionId = session.subscription as string;
-
-    //             console.log(subscriptionId);
-    //             break;
-    //     }
-
-    //     return new Response("OK", { status: 200 });
-    // } catch (err) {
-    //     console.error("Error in webhook route", err);
-    //     return new Response("Error", { status: 500 });
-    // }
 }
