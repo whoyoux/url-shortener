@@ -1,6 +1,6 @@
 import { H1 } from "@/components/ui/H1";
 import { H2 } from "@/components/ui/H2";
-import AuthGuard from "@/lib/AuthGuard";
+import { AuthGuard } from "@/lib/authGuard";
 
 const Dashboard = async () => {
     const session = await AuthGuard();

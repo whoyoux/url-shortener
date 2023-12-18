@@ -2,11 +2,11 @@ import { redirect } from "next/navigation";
 import { getAuthSession } from "./auth";
 
 const AuthGuard = async () => {
-  const session = await getAuthSession();
+    const session = await getAuthSession();
 
-  if (!session) redirect("/");
+    if (!session) redirect("/");
 
-  return session;
+    return session;
 };
 
-export default AuthGuard;
+export { AuthGuard };

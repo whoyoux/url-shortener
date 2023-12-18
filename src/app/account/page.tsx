@@ -1,4 +1,4 @@
-import AuthGuard from "@/lib/AuthGuard";
+import { AuthGuard } from "@/lib/authGuard";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { cancelSubscription } from "../../actions/subscription";
