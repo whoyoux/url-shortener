@@ -1,11 +1,9 @@
+import AuthGuard from "@/lib/AuthGuard";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { cancelSubscription } from "../../actions/subscription";
 import { H1 } from "@/components/ui/H1";
 import { H2 } from "@/components/ui/H2";
-import { Button } from "@/components/ui/button";
-import AuthGuard from "@/lib/AuthGuard";
-import React from "react";
-import { cancelSubscription } from "../(actions)/subscription";
-import Image from "next/image";
-import { P } from "@/components/ui/P";
 import { H4 } from "@/components/ui/H4";
 
 const AccountPage = async () => {
