@@ -4,6 +4,9 @@ const nextConfig = {
         serverComponentsExternalPackages: ["@prisma/client"],
         ppr: true,
     },
+    images: {
+        domains: ["cdn.discordapp.com"],
+    },
     reactStrictMode: false,
 };
 
