@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { AuthGuard } from "@/lib/authGuard";
+import { AuthGuard } from "@/lib/auth-guard";
 import { prisma } from "@/lib/prisma";
 
 import {

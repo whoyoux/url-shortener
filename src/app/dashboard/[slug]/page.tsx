@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
-import AuthGuard from "@/lib/authGuard";
+import AuthGuard from "@/lib/auth-guard";
 import { H1 } from "@/components/ui/H1";
 
 import ChangeNameDialog from "@/components/dashboard/change-name-dialog";
