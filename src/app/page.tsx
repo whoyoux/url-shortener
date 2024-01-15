@@ -62,6 +62,23 @@ export default function Home() {
             </Link>
           </H3>
         </div> */}
+
+
+        <div className="flex flex-col gap-8 w-full mt-10">
+        <div className="border rounded-xl bg-card w-full py-10 text-center">
+          we already shorted 1200 links!
+        </div>
+        <div className="border rounded-xl bg-card w-full py-10 text-center">
+          lorem ipsum
+        </div>
+        <div className="border rounded-xl bg-card w-full py-10 text-center">
+        lorem ipsum
+        </div>
+        <div className="border rounded-xl bg-card w-full py-10 text-center">
+        lorem ipsum
+        </div>
+        </div>
+
       </form>
     </main>
   );
